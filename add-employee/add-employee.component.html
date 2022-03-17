@@ -1,0 +1,88 @@
+
+<p>add-employee works!</p>
+<div>
+    <h1 class="myH1">EMPLOYEE MANAGEMENT SYSTEM</h1>
+</div>
+
+<div class="container">
+    <h2 class="myH2">Add new Employee</h2>
+    <div class="form-div">
+        <form [formGroup]="myForm" (ngSubmit)="mySubmit()">
+            <table class="myTable">
+                <tr>
+                    <div>
+                        <td><label for="name">name</label></td>
+                        <td><input type="text" placeholder="Enter name" name="name" id="name"
+                                formControlName="name" [(ngModel)]="employee.name">
+                            <div *ngIf="name!.invalid && (name!.dirty || name!.touched)">
+                                Name is required
+                            </div>
+                        </td>
+                    </div>
+                </tr>
+                <tr>
+                    <div>
+                        <td><label for="basicPay">Basic pay</label></td>
+                        <td><input type="number" placeholder="Enter Basic pay" name="basicPay" id="basicPay"
+                                maxlength="10" formControlName="basicPay" [(ngModel)]="employee.basicPay">
+                            <div *ngIf="basicPay!.invalid && (basicPay!.dirty || basicPay!.touched)">
+                                <div *ngIf="basicPay!.errors!['required']">
+                                    Basicpay is required
+                                </div>
+                                <div *ngIf="basicPay!.errors!['min']">
+                                    Minimum Basicpay is Rs 20000
+                                </div>
+                            </div>
+
+                        </td>
+                    </div>
+                </tr>
+                <tr>
+                    <div>
+                        <td><label for="dateOfJoining">date of joining</label></td>
+                        <td><input type="date" name="dateOfJoining" id="dateOfJoining" formControlName="dateOfJoining"
+                                [(ngModel)]="employee.dateOfJoining">
+                            <div *ngIf="dateOfJoining!.invalid && (dateOfJoining!.dirty || dateOfJoining!.touched)">
+                                Date of joining is required
+                            </div>
+                        </td>
+                    </div>
+                </tr>
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <div>
+                        <td>
+                            <label for="confirm">Confirm</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" id="confirm" name="confirm" required (click)="toggleConfirmed()"
+                                [(ngModel)]="isConfirmed">
+                        </td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="myCenter">
+                        <div *ngIf="isConfirmed">
+                            <td>
+                                <button mat-raised-button color="primary" type="submit">Submit</button>
+                            </td>
+                            <td>
+                                <button mat-raised-button color="warn" type="reset">Clear</button>
+                            </td>
+                        </div>
+                    </div>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <br>
+
+    <div class="myMain">
+        <a mat-stroked-button routerLink="/employee/home">Home</a>
+    </div>
+    <div *ngIf="msg">
+        {{msg}}
+    </div>
+</div>

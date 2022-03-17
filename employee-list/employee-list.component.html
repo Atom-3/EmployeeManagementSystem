@@ -1,0 +1,30 @@
+<p>employee-list works!</p>
+
+
+<div>
+    <h1 class="myH1">ATOM Management System</h1>
+</div>
+<div class="myCenter">
+    <table class="employees">
+        <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Basic Pay</th>
+            <th>Date of Joining</th>
+            <th>Remove Employee</th>
+            <th>Update Employee</th>
+        </tr>
+        <tr *ngFor="let employee of employees; index as i;">       
+            <td>{{employee.id}}</td>
+            <td>{{employee.name}}</td>  
+            <td>{{employee.basicPay}}</td>
+            <td>{{employee.dateOfJoining | date: 'mediumDate'}}</td>
+            <td style="text-align:center"><button mat-raised-button color="warn" (click)="delEmployee($event, i)">Delete</button></td>
+            <td style="text-align:center;"><a mat-stroked-button color="black" routerLink="/employee/update/{{employee.id}}">Update</a></td>
+        </tr>
+    </table>
+    <br><br>
+    <div class="myMain">
+        <a mat-stroked-button routerLink="/employee/home">Home</a>
+    </div>
+</div>

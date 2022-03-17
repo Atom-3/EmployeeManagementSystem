@@ -1,0 +1,107 @@
+<p>employee-mod works!</p>
+
+
+<div>
+    <h1 class="myH1">ATOM Management System </h1>
+</div>
+<div class="container">
+    <h2 class="myH2">Employee detail Update module</h2>
+    <div class="form-div">
+        <form [formGroup]="myForm" (ngSubmit)="mySubmit()">
+            <table class="myTable">
+                <tr>
+                    <div>
+                        <td><label for="name">Employee name</label></td>
+                        <td><input 
+                                placeholder="Enter employee name"
+                                name="name"
+                                id="name"
+                                formControlName="name"
+                                [(ngModel)]="employee.name">
+                                <div *ngIf="name!.invalid && (name!.dirty || name!.touched)">
+                                    Name is required
+                                </div>     
+                        </td>
+                    </div>
+                </tr>
+                <tr>
+                    <div>
+                        <td><label for="basicPay">Employee basicPay</label></td>
+                        <td><input
+                                placeholder="Enter employee BasicPay"
+                                name="basicPay"
+                                id="basicPay"
+                                maxlength="5"
+                                formControlName="basicPay"
+                                [(ngModel)]="employee.basicPay">
+                                <div *ngIf="basicPay!.invalid && (basicPay!.dirty || basicPay!.touched)">
+                                        <div *ngIf="basicPay!.errors!['required']">
+                                            BasicPay is required
+                                        </div>
+                                        <div *ngIf="basicPay!.errors!['min']">
+                                            Minimum pay is Rs 10000
+                                        </div>     
+                                </div>
+                                
+                        </td>
+                    </div>
+                </tr>
+                <tr>
+                    <div>
+                        <td><label>Date of joining:&nbsp;</label>
+                        <td class="myTd" disabled="true">{{date | date: 'mediumDate'}}</td>
+                    </div>
+                </tr>
+                <tr>
+                    <div>
+                        <td><label>Date Of Joining</label>
+                        <td><input type="date"
+                                name="dateOfJoining"
+                                id="dateOfJoining"
+                                formControlName="dateOfJoining"
+                                [(ngModel)]="employee.dateOfJoining">
+                                <div *ngIf="dateOfJoining!.invalid && (dateOfJoining!.dirty || dateOfJoining!.touched)">
+                                    Date of joining is required
+                                </div>
+                        </td>
+                    </div>
+                </tr>
+   
+                <tr>
+                    <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <div>
+                        <td>
+                            <label for="confirm">Confirm</label>
+                        </td>
+                        <td>
+                            <input type="checkbox"
+                            id="confirm"
+                            name="confirm"
+                            required
+                            (click)="toggleConfirmed()"
+                            [(ngModel)]="isConfirmed">
+                        </td>
+                   </div>    
+                </tr>
+                <br>
+                <tr>
+                    <td>
+                        <div *ngIf="isConfirmed">
+                            <button mat-raised-button color="primary" type="submit">Submit</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button mat-raised-button color="warn" type="reset" (click)="myReset()">Clear</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="myMain">
+            <a mat-stroked-button routerLink="/employees/home">Home</a>
+        </div>
+    </div>
+    <div *ngIf="msg">
+        {{msg}}
+    </div>
+</div>
